@@ -15,6 +15,10 @@ public class CartViewPage extends ParentDriver
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	} 
+	//@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"₹\")")
+	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Proceed to Buy\")")
+	AndroidElement ProceedToBuy_Button;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"₹\")")
 	AndroidElement Price_InCartView;
 	
@@ -28,5 +32,9 @@ public class CartViewPage extends ParentDriver
 	public String getItemName_In_CartView() 
 	{
 		return ItemName_InCartView.getText();
+	}
+	public void Select_ProceedToBuy() 
+	{
+		ProceedToBuy_Button.click();
 	}
 }

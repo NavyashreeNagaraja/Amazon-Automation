@@ -6,9 +6,11 @@ import com.amazon.parentdriver.ParentDriver;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class SearchItemPage extends ParentDriver 
@@ -18,30 +20,47 @@ public class SearchItemPage extends ParentDriver
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	} 
 	
-	@AndroidFindBy(id="com.amazon.mShop.android.shopping:id/rs_search_src_text")
+	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Search\")")
 	AndroidElement SearchItem_TextBox;
 	
 	@AndroidFindBy(className="android.widget.TextView")
-	List<AndroidElement> ItemList;
+	static List<AndroidElement> ItemList;
 	
-	public ItemsDisplayPage SearchItem(String ItemName) {
+	@AndroidFindBy(id = "com.amazon.mShop.android.shopping:id/loc_ux_update_current_pin_code")
+	private AndroidElement UseMyCurrentLocation_Button;
+	
+	
+	@AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
+	private AndroidElement AllowAlways_Button_InLocationPopup;
+	
+	public ItemsDisplayPage SearchItem(String ItemName) throws InterruptedException {
+		Thread.sleep(10000);
 		SearchItem_TextBox.click();
 		//entering the Item name in the search product text box
 		SearchItem_TextBox.sendKeys(ItemName.toLowerCase());
-		
-		for(int i=0; i<=ItemList.size(); i++)
+		Thread.sleep(5000);
+		SelectItem();
+		//selecting the "Use my current location" button 
+		//UseMyCurrentLocation_Button.click();
+		//selecting the "Allow all the time" button
+		//AllowAlways_Button_InLocationPopup.click();
+		//SelectItem();
+		return new ItemsDisplayPage(driver);
+	}
+	public static void SelectItem()
+	{
+		for(int i=1; i<=ItemList.size(); i++)
 		{
 			String CurrentItemName = ItemList.get(i).getText();
 			
 			//The below loop helps us to not select the first product and the last product i.e.., it clicks any other product in the product list apart from first and last one.
-			if(i!=0 && i!=ItemList.size())
+			if(i!=1 && i!=ItemList.size())
 			{
-				if(CurrentItemName.contains(ItemName)) {
+				//if(CurrentItemName.contains(ItemName)) {
 					ItemList.get(i).click();
 					break;
-				}
+				//}
 			}
 		}
-		return new ItemsDisplayPage(driver);
 	}
 }

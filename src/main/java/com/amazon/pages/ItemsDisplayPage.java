@@ -20,39 +20,37 @@ public class ItemsDisplayPage extends ParentDriver
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
-
-	@AndroidFindBy(id = "com.amazon.mShop.android.shopping:id/loc_ux_gps_auto_detect")
-	private AndroidElement UseMyCurrentLocation_Button;
 	
-	@AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
-	private AndroidElement AllowAlways_Button_InLocationPopup;
-	
-	@AndroidFindBy(id="add-to-cart-button")
+	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Add to Cart\")")
 	AndroidElement AddToCart_Button;
 	
-	@AndroidFindBy(id="atfRedesign_priceblock_priceToPay")
+	//@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View[3]/android.view.View/android.view.View[2]/android.view.View[1]/android.view.View/android.view.View/android.widget.EditText")
+	//AndroidElement ItemPrice;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"₹\")")
 	AndroidElement ItemPrice;
 	
 	@AndroidFindBy(id="com.amazon.mShop.android.shopping:id/chrome_action_bar_cart_image")
 	AndroidElement GoToCart_Image;
 
-	public String getItemPrice(String ItemName) 
+	public String getItemPrice(String ItemName) throws InterruptedException 
 	{
-		//selecting the "Use my current location" button 
-		UseMyCurrentLocation_Button.click();
-		//selecting the "Allow all the time" button
-		AllowAlways_Button_InLocationPopup.click();
+		
 		//waiting for the page to refresh
-		WebDriverWait wait = new WebDriverWait(this.driver,30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("atfRedesign_priceblock_priceToPay")));
+		//WebDriverWait wait = new WebDriverWait(this.driver,30);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("atfRedesign_priceblock_priceToPay")));
 		
 		if (driver.findElementsByXPath("//android.view.View[contains(@text,\""+ ItemName + "\")]").size() > 0) 
 		{
+			//Trying to fetch the Item name before adding to the cart
+			ItemName_BeforeAddingToCart= driver.findElementByXPath("//android.view.View[contains(@text,\"" + ItemName+ "\")]").getText();
+			
+			//scrolling until it finds the text "rupees"
+			this.driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView("+ "new UiSelector().textContains(\"₹\"));");
 			String Price_BeforeAddingToCart;
 			//Trying to fetch the Item price before adding to the cart
 			Price_BeforeAddingToCart = ItemPrice.getText();
-			//Trying to fetch the Item name before adding to the cart
-			ItemName_BeforeAddingToCart= driver.findElementByXPath("//android.view.View[contains(@text,\"" + ItemName+ "\")]").getText();
+			
 		} 			
 	return Price_BeforeAddingToCart;
 	}
