@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="221275" started-at="2020-11-04T12:32:01 IST" finished-at="2020-11-04T12:35:42 IST">
+  <suite name="Default suite" duration-ms="100919" started-at="2020-11-10T11:31:00 IST" finished-at="2020-11-10T11:32:41 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="221275" started-at="2020-11-04T12:32:01 IST" finished-at="2020-11-04T12:35:42 IST">
+    <test name="Default test" duration-ms="100919" started-at="2020-11-10T11:31:00 IST" finished-at="2020-11-10T11:32:41 IST">
       <class name="com.amazon.tests.Test1">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="Setup" is-config="true" duration-ms="27624" started-at="2020-11-04T12:32:01 IST" finished-at="2020-11-04T12:32:28 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="Setup" is-config="true" duration-ms="38351" started-at="2020-11-10T11:31:01 IST" finished-at="2020-11-10T11:31:39 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="VerifyItemDataInCartView(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="VerifyItemDataInCartView" duration-ms="192954" started-at="2020-11-04T12:32:28 IST" data-provider="InputData" finished-at="2020-11-04T12:35:41 IST">
+        <test-method status="PASS" signature="VerifyItemDataInCartView(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="VerifyItemDataInCartView" duration-ms="61863" started-at="2020-11-10T11:31:39 IST" data-provider="InputData" finished-at="2020-11-10T11:32:41 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Redmi Note 9 Pro]]>
+                <![CDATA[Redmi Note 7]]>
               </value>
             </param>
             <param index="1">
@@ -32,7 +32,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyItemDataInCartView -->
-        <test-method status="PASS" signature="Cleanup()[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="Cleanup" is-config="true" duration-ms="547" started-at="2020-11-04T12:35:41 IST" finished-at="2020-11-04T12:35:42 IST">
+        <test-method status="PASS" signature="Cleanup()[pri:0, instance:com.amazon.tests.Test1@3e57cd70]" name="Cleanup" is-config="true" duration-ms="568" started-at="2020-11-10T11:32:41 IST" finished-at="2020-11-10T11:32:41 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Cleanup -->

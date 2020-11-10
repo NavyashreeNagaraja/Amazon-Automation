@@ -54,28 +54,39 @@ public class Test1
 		ParentDriver_Object.Entered_ItemName = Item_Name;
 		
 		WelcomePage_Object = HomePage_Object.SelectAlreadyACustomerButton();
-		LoginPage_Object = WelcomePage_Object.EnterLoginEmail(Login_EmailId);
-		SearchItemPage_Object = LoginPage_Object.Login(Login_Password);
+		WelcomePage_Object.VerifyFunctionality_WhenNoLoginEmailIsEntered();
+		WelcomePage_Object.VerifyFunctionality_WhenInvalidEmailIsEntered();
+		
+		LoginPage_Object = WelcomePage_Object.VerifyFunctionality_WhenValidLoginEmailIsEntered(Login_EmailId);
+		
+		LoginPage_Object.VerifyFunctionality_WhenNoPasswordIsEntered();
+		LoginPage_Object.VerifyFunctionality_WhenInvalidPasswordIsEntered();
+		SearchItemPage_Object = LoginPage_Object.VerifyFunctionality_WhenValidPasswordIsEntered(Login_Password);
 		
 		ItemsDisplayPage_Object = SearchItemPage_Object.SearchItem(Item_Name);
-		String Price_BeforeAddingToCart = ItemsDisplayPage_Object.getItemPrice(Item_Name);
-		String ItemName_BeforeAddingToCart= ItemsDisplayPage_Object.getItemName_BeforeAddingToCart();
+		
+		String ItemName_BeforeAddingToCart= ItemsDisplayPage_Object.getItemName_BeforeAddingToCart(Item_Name);
+		String Price_BeforeAddingToCart = ItemsDisplayPage_Object.getItemPrice();
 		
 		CartViewPage_Object = ItemsDisplayPage_Object.GoToCart();
-		CartViewPage_Object.Select_ProceedToBuy();
-		/*
+		//CartViewPage_Object.Select_ProceedToBuy();
+		
 		String Price_InCartView = CartViewPage_Object.getPrice_In_CartView();
+		System.out.println("Price_InCartView" + Price_InCartView.trim());
+		System.out.println("Price_BeforeAddingToCart" + Price_BeforeAddingToCart.trim());
 		
 		//Verifying whether the Item price in the Cart View is same as the  Item Price before adding to cart.
-		Assert.assertEquals(Price_BeforeAddingToCart.trim(), Price_InCartView.trim());
+		Assert.assertTrue(Price_InCartView.trim().contains(Price_BeforeAddingToCart.trim()));
 		log.info("Item price in the Cart View is same as the  Item Price before adding to cart");
 		
 		String ItemName_InCartView= CartViewPage_Object.getItemName_In_CartView();
 		
+		System.out.println("ItemName_InCartView" + ItemName_InCartView.trim());
+		System.out.println("ItemName_BeforeAddingToCart" + ItemName_BeforeAddingToCart.trim());
 		//Verifying whether the Item Name in the Cart View is same as the Item Name before adding to cart.
-		Assert.assertEquals(ItemName_BeforeAddingToCart.trim(), ItemName_InCartView.trim());
+		Assert.assertTrue(ItemName_BeforeAddingToCart.trim().contains(ItemName_InCartView.trim()));
 		log.info("Item Name in the Cart View is same as the Item Name before adding to cart");
-		*/
+		
 	}
 	
 	@DataProvider(name="InputData")

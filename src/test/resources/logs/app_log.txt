@@ -1,4 +1,6 @@
-INFO    2020-11-04 12:32:07,029 [main] com.amazon.tests.Test1  - Appium Server Started !!
-INFO    2020-11-04 12:32:07,044 [main] com.amazon.tests.Test1  - amazon_Android.properties properties file loaded !!!
-INFO    2020-11-04 12:32:28,788 [main] com.amazon.tests.Test1  - Test case execution started
-INFO    2020-11-04 12:35:42,424 [main] com.amazon.tests.Test1  - Test case execution completed
+INFO    2020-11-10 11:31:07,690 [main] com.amazon.tests.Test1  - Appium Server Started !!
+INFO    2020-11-10 11:31:07,705 [main] com.amazon.tests.Test1  - amazon_Android.properties properties file loaded !!!
+INFO    2020-11-10 11:31:39,357 [main] com.amazon.tests.Test1  - Test case execution started
+INFO    2020-11-10 11:32:40,624 [main] com.amazon.tests.Test1  - Item price in the Cart View is same as the  Item Price before adding to cart
+INFO    2020-11-10 11:32:41,318 [main] com.amazon.tests.Test1  - Item Name in the Cart View is same as the Item Name before adding to cart
+INFO    2020-11-10 11:32:41,907 [main] com.amazon.tests.Test1  - Test case execution completed
