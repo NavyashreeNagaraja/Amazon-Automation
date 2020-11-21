@@ -18,27 +18,23 @@ public class WelcomePage extends ParentDriver {
 	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Continue\")")
 	AndroidElement Continue_Button;
 	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View[2]/android.view.View[2]/android.view.View/android.view.View/android.view.View[3]/android.widget.EditText")
+	@AndroidFindBy(xpath = "//android.widget.EditText[@resource-id='ap_email_login']")
 	private AndroidElement EmailLogin_TextBox;
 	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[3]/android.view.View[2]/android.view.View[2]/android.view.View/android.view.View/android.view.View[3]/android.widget.EditText")
+	@AndroidFindBy(xpath = "//android.widget.EditText[@resource-id='ap_email_login']")
 	private AndroidElement EmailLogin_TextBox_Highlighted;
 		
 	String invalid_login_emailid = "abczq@gmail.com";
 	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[3]/android.view.View[2]/android.view.View[2]/android.view.View/android.view.View/android.view.View[3]/android.view.View[2]/android.widget.Image")
+	@AndroidFindBy(xpath = "//android.widget.FrameLayout/android.widget.RelativeLayout")
 	private AndroidElement ClearButton_InLogin_TextBox;
-	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.view.View\"")
-	private AndroidElement InvalidEmail_Text;
 	
 	public void VerifyFunctionality_WhenNoLoginEmailIsEntered()
 	{
 		//click on the continue button without entering any username or email id
 		Continue_Button.click();
 		//verifying whether "Enter email or mobile" text is getting displayed or not
-		boolean isEnterEmailOrMobile_TextVisibile = (this.driver.findElements(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View[2]/android.view.View[2]/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.view.View[2]")).size())== 1 ? true : false;
-	
+		boolean isEnterEmailOrMobile_TextVisibile = (this.driver.findElements(By.xpath("//android.view.View[@text='Enter your email or mobile phone number']")).size())== 1 ? true : false;
 		if(isEnterEmailOrMobile_TextVisibile == true)
 		{
 			System.out.println("When user doesn't enter login username and clicks on Continue button, the text : 'Enter username or mobile phone number' is visible on the screen");
@@ -52,8 +48,10 @@ public class WelcomePage extends ParentDriver {
 	{
 		EmailLogin_TextBox.sendKeys(invalid_login_emailid);
 		Continue_Button.click();
-		boolean isInvalidLoginID_TextVisible = (this.driver.findElements(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.view.View"))
+
+		boolean isInvalidLoginID_TextVisible = (this.driver.findElements(By.xpath("//android.view.View[@text='We cannot find an account with that email address']"))
 				.size())== 1 ? true : false;
+		
 		if(isInvalidLoginID_TextVisible == true)
 		{
 			System.out.println("When user entered invalid email id/username, then the text : 'We cannot find an account with that email address' is visible on the screen");

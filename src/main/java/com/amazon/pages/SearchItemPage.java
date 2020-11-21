@@ -28,8 +28,7 @@ public class SearchItemPage extends ParentDriver
 	
 	@AndroidFindBy(id = "com.amazon.mShop.android.shopping:id/loc_ux_update_current_pin_code")
 	private AndroidElement UseMyCurrentLocation_Button;
-	
-	
+		
 	@AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
 	private AndroidElement AllowAlways_Button_InLocationPopup;
 	
@@ -56,10 +55,8 @@ public class SearchItemPage extends ParentDriver
 			//The below loop helps us to not select the first product and the last product i.e.., it clicks any other product in the product list apart from first and last one.
 			if(i!=1 && i!=ItemList.size())
 			{
-				//if(CurrentItemName.contains(ItemName)) {
 					ItemList.get(i).click();
 					break;
-				//}
 			}
 		}
 	}

@@ -27,8 +27,7 @@ public class ItemsDisplayPage extends ParentDriver
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Add to Cart\")")
 	AndroidElement AddToCart_Button;
-
-							
+						
 	@AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"rupees\")")
 	AndroidElement ItemPrice;
 

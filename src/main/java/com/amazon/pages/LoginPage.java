@@ -17,31 +17,19 @@ public class LoginPage extends ParentDriver{
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}	
 	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[5]/android.view.View[2]/android.widget.EditText")
+	@AndroidFindBy(xpath = "//android.widget.EditText[@resource-id='ap_password']")
 	private AndroidElement Password_TextBox;
-	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[6]/android.view.View[2]/android.widget.EditText")
-	private AndroidElement Password_TextBox_Highlighted;
 												 
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[5]/android.view.View[6]/android.widget.Button")
-	private AndroidElement Login_Button_Before;
-			
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[5]/android.view.View[7]/android.widget.Button")
-	private AndroidElement Login_Button_AfterEnteringWrongPassword;
-	
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[6]/android.view.View[6]/android.widget.Button")
-	private AndroidElement Login_Button_AfterEnteringRightPassword;
+	@AndroidFindBy(xpath = "//android.widget.Button[@resource-id='signInSubmit']")
+	private AndroidElement Login_Button;
 
-	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.view.View")
-	private AndroidElement InvalidPassword_Text;
-	
 	String invalid_login_password = "123";
 	
 	public void VerifyFunctionality_WhenNoPasswordIsEntered()
 	{
 		//click on the Login button without entering any password
-		Login_Button_Before.click();
-		boolean isEnterPassword_TextVisible = (this.driver.findElements(By.xpath(" /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[5]/android.view.View[3]/android.view.View/android.view.View[2]")).size()) == 1 ? true : false;
+		Login_Button.click();
+		boolean isEnterPassword_TextVisible = (this.driver.findElements(By.xpath("//android.view.View[@text='Enter your password']")).size()) == 1 ? true : false;
 		if(isEnterPassword_TextVisible == true)
 		{
 			System.out.println("When user doesn't enter login password and clicks on Login button, then the text 'Enter your password' is visible");
@@ -54,9 +42,8 @@ public class LoginPage extends ParentDriver{
 	public void VerifyFunctionality_WhenInvalidPasswordIsEntered()
 	{
 		Password_TextBox.sendKeys(invalid_login_password);
-		Login_Button_AfterEnteringWrongPassword.click();
-		boolean isInvalidPassword_TextVisible = (this.driver.findElements(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.view.View"))
-				.size())== 1 ? true : false;
+		Login_Button.click();
+		boolean isInvalidPassword_TextVisible = (this.driver.findElements(By.xpath("//android.view.View[@text='Your password is incorrect']")).size()) == 1 ? true : false;
 		if(isInvalidPassword_TextVisible == true)
 		{
 			System.out.println("When user entered invalid password, then the text 'Your password is incorrect' is visible on the screen");
@@ -70,9 +57,9 @@ public class LoginPage extends ParentDriver{
 	
 	public SearchItemPage VerifyFunctionality_WhenValidPasswordIsEntered(String valid_login_password)
 	{
-		Password_TextBox_Highlighted.sendKeys(valid_login_password);
+		Password_TextBox.sendKeys(valid_login_password);
 		
-		Login_Button_AfterEnteringRightPassword.click();
+		Login_Button.click();
 		return new SearchItemPage(driver);
 	}
 	
